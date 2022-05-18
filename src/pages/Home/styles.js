@@ -20,13 +20,14 @@ export const Title = styled.h3`
 export const Movies = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   padding: 0 2.8rem;
-  max-height: 480px;
+  max-height: 600px;
   overflow-y: auto;
 `;
 
-export const Movie = styled.a`
+export const Movie = styled.div`
   text-decoration: none;
   cursor: pointer;
 
