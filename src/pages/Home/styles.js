@@ -23,7 +23,7 @@ export const Movies = styled.ul`
   align-items: center;
   justify-content: space-between;
   padding: 0 2.8rem;
-  max-height: 600px;
+  max-height: 60rem;
   overflow-y: auto;
 `;
 
@@ -34,8 +34,8 @@ export const Movie = styled.div`
   li {
     padding: 0.8rem;
     margin-bottom: 1.1rem;
-    border-radius: 3px;
+    border-radius: 0.3rem;
     background-color: #fff;
-    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.2rem 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
   }
 `;

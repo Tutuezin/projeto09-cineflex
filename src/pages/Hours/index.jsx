@@ -1,44 +1,60 @@
-import { Container, Hour } from "./styles";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Container, Hour, Footer } from "./styles";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Hours() {
-  const { id } = useParams();
-  console.log(id);
+  const { idMovie } = useParams();
+  // console.log(id);
 
-  const [objHours, setObjHours] = useState({});
+  const [week, setWeek] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v5/cineflex/movies/${id}/showtimes`
+      `https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`
     );
     promise.then((res) => {
-      setObjHours(res.data);
-      console.log(res.data.days);
+      setWeek(res.data);
+      // console.log(res.data.days);
+    });
+    promise.catch((error) => {
+      console.log(error.message);
     });
   }, []);
 
   return (
-    <Container>
-      <h3 className="title">Selecionar Horário</h3>
+    <>
+      <Container>
+        <h3 className="title">Selecionar Horário</h3>
 
-      <div className="scroll">
-        {objHours.days
-          ? objHours.days.map((day, index) => {
+        <div className="scroll">
+          {week.days ? (
+            week.days.map((day, index) => {
               return (
                 <Hour key={index}>
-                  <p>{`${day.weekday} - ${day.date}`}</p>
+                  <p>{day.weekday}</p>
                   <div className="times">
                     {day.showtimes.map((hour, index) => {
-                      return <li key={index}>{hour.name}</li>;
+                      return (
+                        <Link to={`/section/${hour.id}`}>
+                          <li key={index}>{hour.name}</li>
+                        </Link>
+                      );
                     })}
                   </div>
                 </Hour>
               );
             })
-          : ""}
-      </div>
-    </Container>
+          ) : (
+            <div className="loader"></div>
+          )}
+        </div>
+        <Footer>
+          {console.log(week.d)}
+          <img width={64} height={89} src={week.posterURL} alt="" />
+          <h2>{week.title}</h2>
+        </Footer>
+      </Container>
+    </>
   );
 }

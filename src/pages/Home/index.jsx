@@ -1,11 +1,10 @@
 import { Container, Title, Movies, Movie } from "./styles";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import filme from "../../assets/imgs/filme.svg";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [arrayMovies, setArrayMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
@@ -13,26 +12,30 @@ export default function Home() {
     );
 
     promise.then((res) => {
-      setArrayMovies(res.data);
-      console.log(res.data);
+      setMovies(res.data);
+    });
+    promise.catch((error) => {
+      console.log(error.message);
     });
   }, []);
+
+  // console.log(movies);
 
   return (
     <Container>
       <Title>Selecione o filme</Title>
 
       <Movies>
-        {arrayMovies.map((movies, index) => {
+        {movies.map((movie, index) => {
           return (
             <Movie key={index}>
-              <Link to={`/movies/${movies.id}`}>
+              <Link to={`/movies/${movie.id}`}>
                 <li>
                   <img
                     width={129}
                     height={193}
-                    src={movies.posterURL}
-                    alt={movies.title}
+                    src={movie.posterURL}
+                    alt={movie.title}
                   />
                 </li>
               </Link>
