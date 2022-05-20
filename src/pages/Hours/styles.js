@@ -9,6 +9,11 @@ export const Container = styled.div`
   .scroll {
     max-height: 47rem;
     overflow-y: auto;
+
+    margin: 0 auto;
+
+    max-width: 37.5rem;
+    width: 100%;
   }
 
   .title {

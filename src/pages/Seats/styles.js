@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-top: 6.7rem;
   background-color: #fff;
+  margin: 0 auto;
+
+  max-width: 37.5rem;
+  width: 100%;
 
   .title {
     display: flex;
@@ -58,8 +62,8 @@ export const Seat = styled.li`
   margin-right: 0.6rem;
   margin-bottom: 1.8rem;
 
-  background: ${(props) => (props.selected ? "#8dd7cf" : "#c3cfd9")};
-  border: 0.1rem solid ${(props) => (props.selected ? "#45bdb0" : "#808f9d")};
+  background: ${(props) => (props.selected ? "#c3cfd9" : "#fbe192")};
+  border: 0.1rem solid ${(props) => (props.selected ? "#808f9d" : "#f7c52b")};
 
   font-size: 1.1rem;
   letter-spacing: 4%;
@@ -100,5 +104,35 @@ export const Examples = styled.div`
   p {
     margin-top: 0.5rem;
     font-size: 1.3rem;
+  }
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+
+  height: 11.7rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  background: #dfe6ed;
+  border: 0.1rem solid #9eadba;
+
+  img {
+    padding: 0.8rem;
+    background: #ffffff;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.2rem;
+
+    margin-left: 1rem;
+    margin-right: 1.4rem;
+  }
+
+  h2 {
+    font-size: 2.6rem;
+    color: #293845;
   }
 `;

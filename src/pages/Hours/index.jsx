@@ -50,7 +50,7 @@ export default function Hours() {
           )}
         </div>
         <Footer>
-          {console.log(week.d)}
+          {console.log(week)}
           <img width={64} height={89} src={week.posterURL} alt="" />
           <h2>{week.title}</h2>
         </Footer>
