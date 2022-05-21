@@ -5,7 +5,6 @@ import axios from "axios";
 
 export default function Hours() {
   const { idMovie } = useParams();
-  console.log(idMovie);
 
   const [week, setWeek] = useState([]);
 
@@ -16,7 +15,6 @@ export default function Hours() {
     promise
       .then((res) => {
         setWeek(res.data);
-        // console.log(res.data.days);
       })
       .catch((error) => {
         console.log(error.message);
@@ -51,7 +49,6 @@ export default function Hours() {
           )}
         </div>
         <Footer>
-          {/* {console.log(week)} */}
           <img width={64} height={89} src={week.posterURL} alt="" />
           <h2>{week.title}</h2>
         </Footer>

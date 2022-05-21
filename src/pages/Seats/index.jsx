@@ -8,6 +8,7 @@ export default function Seats() {
   const { idSeat } = useParams();
 
   const [benchs, setBenchs] = useState([]);
+  const [addSelected, setAddSelected] = useState([]);
 
   useEffect(() => {
     const promiseSeat = axios.get(
@@ -23,19 +24,33 @@ export default function Seats() {
       });
   }, []);
 
+  useEffect(() => console.log(addSelected), [addSelected]);
+
+  const getSelecteds = (name, selected) => {
+    if (selected) setAddSelected([...addSelected, name]);
+    else {
+      setAddSelected(addSelected.filter((item) => item !== name));
+    }
+  };
+
   return (
     <Container>
       <h3 className="title">Selecione o(s) assento(s)</h3>
       <UlSeats>
-        {benchs.seats?.map((bench, index) => {
-          return (
-            <Assento
-              key={index}
-              isAvailable={bench.isAvailable}
-              name={bench.name}
-            />
-          );
-        })}
+        {benchs.seats ? (
+          benchs.seats.map((bench, index) => {
+            return (
+              <Assento
+                getSelecteds={getSelecteds}
+                key={index}
+                isAvailable={bench.isAvailable}
+                name={bench.name}
+              />
+            );
+          })
+        ) : (
+          <div className="loader"></div>
+        )}
       </UlSeats>
 
       <Examples>
@@ -52,6 +67,12 @@ export default function Seats() {
           <p>Indisponível</p>
         </div>
       </Examples>
+
+      <form action="">
+        <label htmlFor="name">Nome do comprador:</label>
+        <input type="text" name="name" />
+      </form>
+
       <Footer>
         <img
           width={64}
