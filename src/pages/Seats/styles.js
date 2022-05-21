@@ -49,7 +49,8 @@ export const UlSeats = styled.ul`
 `;
 
 export const Seat = styled.li`
-  cursor: pointer;
+  cursor: ${(props) => (props.available ? "pointer" : "default")};
+  user-select: none;
 
   display: flex;
   justify-content: center;
@@ -62,8 +63,11 @@ export const Seat = styled.li`
   margin-right: 0.6rem;
   margin-bottom: 1.8rem;
 
-  background: ${(props) => (props.selected ? "#c3cfd9" : "#fbe192")};
-  border: 0.1rem solid ${(props) => (props.selected ? "#808f9d" : "#f7c52b")};
+  background: ${(props) =>
+    props.available ? (props.selected ? "#8dd7cf" : "#c3cfd9") : "#fbe192"};
+  border: 0.1rem solid
+    ${(props) =>
+      props.available ? (props.selected ? "#45bdb0" : "#808f9d") : "#f7c52b"};
 
   font-size: 1.1rem;
   letter-spacing: 4%;

@@ -11,15 +11,14 @@ export default function Home() {
       "https://mock-api.driven.com.br/api/v5/cineflex/movies"
     );
 
-    promise.then((res) => {
-      setMovies(res.data);
-    });
-    promise.catch((error) => {
-      console.log(error.message);
-    });
+    promise
+      .then((res) => {
+        setMovies(res.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }, []);
-
-  // console.log(movies);
 
   return (
     <Container>

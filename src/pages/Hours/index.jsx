@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Hours() {
   const { idMovie } = useParams();
-  // console.log(id);
+  console.log(idMovie);
 
   const [week, setWeek] = useState([]);
 
@@ -13,13 +13,14 @@ export default function Hours() {
     const promise = axios.get(
       `https://mock-api.driven.com.br/api/v5/cineflex/movies/${idMovie}/showtimes`
     );
-    promise.then((res) => {
-      setWeek(res.data);
-      // console.log(res.data.days);
-    });
-    promise.catch((error) => {
-      console.log(error.message);
-    });
+    promise
+      .then((res) => {
+        setWeek(res.data);
+        // console.log(res.data.days);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }, []);
 
   return (
@@ -50,7 +51,7 @@ export default function Hours() {
           )}
         </div>
         <Footer>
-          {console.log(week)}
+          {/* {console.log(week)} */}
           <img width={64} height={89} src={week.posterURL} alt="" />
           <h2>{week.title}</h2>
         </Footer>
