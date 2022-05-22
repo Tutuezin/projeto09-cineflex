@@ -6,6 +6,16 @@ export const Container = styled.div`
 
   background-color: #fff;
 
+  .scroll {
+    max-height: 51rem;
+    overflow-y: auto;
+
+    margin: 0 auto;
+
+    max-width: 37.5rem;
+    width: 100%;
+  }
+
   .title {
     display: flex;
     justify-content: center;

@@ -160,6 +160,11 @@ export const Form = styled.form`
     color: #ffffff;
     background-color: #e8833a;
   }
+
+  a {
+    text-decoration: none;
+    margin: 0 auto;
+  }
 `;
 
 export const Footer = styled.footer`

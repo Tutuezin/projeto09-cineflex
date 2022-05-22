@@ -57,6 +57,9 @@ export const Container = styled.div`
     border-radius: 3px;
     background-color: #e8833a;
   }
+  a {
+    text-decoration: none;
+  }
 
   br {
     margin-bottom: 0.5rem;

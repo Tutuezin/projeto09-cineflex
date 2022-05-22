@@ -1,11 +1,18 @@
 import { Container, UlSeats, Examples, Form, Footer } from "./styles";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Assento from "./Assento";
 import axios from "axios";
 
-export default function Seats() {
+export default function Seats({
+  setSession,
+  purchasedSeats,
+  setPurchasedSeats,
+  setPurchaserName,
+  setPurchaserCpf,
+}) {
   const { idSeat } = useParams();
+  const navigate = useNavigate();
 
   const [benchs, setBenchs] = useState([]);
   const [addSelected, setAddSelected] = useState([]);
@@ -20,7 +27,7 @@ export default function Seats() {
     promise
       .then((res) => {
         setBenchs(res.data);
-        console.log(res.data.seats);
+        setSession(res.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -29,10 +36,15 @@ export default function Seats() {
 
   useEffect(() => console.log(addSelected), [addSelected]);
 
-  const getSelecteds = (id, selected) => {
+  const getSelecteds = (id, name, selected) => {
     if (selected) setAddSelected([...addSelected, parseInt(id)]);
     else {
       setAddSelected(addSelected.filter((item) => item !== parseInt(id)));
+    }
+
+    if (selected) setPurchasedSeats([...purchasedSeats, name]);
+    else {
+      setPurchasedSeats(purchasedSeats.filter(() => name !== name));
     }
   };
 
@@ -44,14 +56,15 @@ export default function Seats() {
       name,
       cpf,
     };
-    console.log(body);
 
     const promise = axios.post(
       "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",
       body
     );
     promise
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        navigate("/success");
+      })
       .catch((err) => console.log(err.mesage));
   };
 
@@ -99,7 +112,10 @@ export default function Seats() {
             value={name}
             type="text"
             placeholder="Digite seu nome..."
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setPurchaserName(e.target.value);
+            }}
             required
           />
 
@@ -109,7 +125,10 @@ export default function Seats() {
             value={cpf}
             type="text"
             placeholder="Digite seu CPF..."
-            onChange={(e) => setCpf(e.target.value)}
+            onChange={(e) => {
+              setCpf(e.target.value);
+              setPurchaserCpf(e.target.value);
+            }}
             required
           />
 

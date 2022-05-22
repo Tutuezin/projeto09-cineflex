@@ -6,9 +6,9 @@ export default function Assento({ isAvailable, name, id, getSelecteds }) {
 
   const toggleSelected = () => {
     if (selected) {
-      getSelecteds(id, false);
+      getSelecteds(id, name, false);
     } else {
-      getSelecteds(id, true);
+      getSelecteds(id, name, true);
     }
     setSelected(!selected);
   };
