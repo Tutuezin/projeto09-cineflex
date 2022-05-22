@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Seat } from "./styles";
 
-export default function Assento({ isAvailable, name, getSelecteds }) {
+export default function Assento({ isAvailable, name, id, getSelecteds }) {
   const [selected, setSelected] = useState(false);
 
   const toggleSelected = () => {
     if (selected) {
-      getSelecteds(name, false);
+      getSelecteds(id, false);
     } else {
-      getSelecteds(name, true);
+      getSelecteds(id, true);
     }
     setSelected(!selected);
   };

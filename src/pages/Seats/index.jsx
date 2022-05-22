@@ -1,4 +1,4 @@
-import { Container, UlSeats, Examples, Footer } from "./styles";
+import { Container, UlSeats, Examples, Form, Footer } from "./styles";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Assento from "./Assento";
@@ -9,15 +9,18 @@ export default function Seats() {
 
   const [benchs, setBenchs] = useState([]);
   const [addSelected, setAddSelected] = useState([]);
+  const [name, setName] = useState("");
+  const [cpf, setCpf] = useState("");
 
   useEffect(() => {
-    const promiseSeat = axios.get(
+    const promise = axios.get(
       `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSeat}/seats`
     );
 
-    promiseSeat
+    promise
       .then((res) => {
         setBenchs(res.data);
+        console.log(res.data.seats);
       })
       .catch((error) => {
         console.log(error.message);
@@ -26,52 +29,93 @@ export default function Seats() {
 
   useEffect(() => console.log(addSelected), [addSelected]);
 
-  const getSelecteds = (name, selected) => {
-    if (selected) setAddSelected([...addSelected, name]);
+  const getSelecteds = (id, selected) => {
+    if (selected) setAddSelected([...addSelected, parseInt(id)]);
     else {
-      setAddSelected(addSelected.filter((item) => item !== name));
+      setAddSelected(addSelected.filter((item) => item !== parseInt(id)));
     }
+  };
+
+  const postSeats = (e) => {
+    e.preventDefault();
+
+    const body = {
+      ids: addSelected,
+      name,
+      cpf,
+    };
+    console.log(body);
+
+    const promise = axios.post(
+      "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many",
+      body
+    );
+    promise
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.mesage));
   };
 
   return (
     <Container>
       <h3 className="title">Selecione o(s) assento(s)</h3>
-      <UlSeats>
-        {benchs.seats ? (
-          benchs.seats.map((bench, index) => {
-            return (
-              <Assento
-                getSelecteds={getSelecteds}
-                key={index}
-                isAvailable={bench.isAvailable}
-                name={bench.name}
-              />
-            );
-          })
-        ) : (
-          <div className="loader"></div>
-        )}
-      </UlSeats>
+      <div className="scroll">
+        <UlSeats>
+          {benchs.seats ? (
+            benchs.seats.map((bench, index) => {
+              return (
+                <Assento
+                  getSelecteds={getSelecteds}
+                  key={index}
+                  isAvailable={bench.isAvailable}
+                  name={bench.name}
+                  id={bench.id}
+                />
+              );
+            })
+          ) : (
+            <div className="loader"></div>
+          )}
+        </UlSeats>
 
-      <Examples>
-        <div className="example">
-          <div className="seatSelected"></div>
-          <p>Selecionado</p>
-        </div>
-        <div className="example">
-          <div className="seatAvailable"></div>
-          <p>Disponível</p>
-        </div>
-        <div className="example">
-          <div className="seatUnavailable"></div>
-          <p>Indisponível</p>
-        </div>
-      </Examples>
+        <Examples>
+          <div className="example">
+            <div className="seatSelected"></div>
+            <p>Selecionado</p>
+          </div>
+          <div className="example">
+            <div className="seatAvailable"></div>
+            <p>Disponível</p>
+          </div>
+          <div className="example">
+            <div className="seatUnavailable"></div>
+            <p>Indisponível</p>
+          </div>
+        </Examples>
 
-      <form action="">
-        <label htmlFor="name">Nome do comprador:</label>
-        <input type="text" name="name" />
-      </form>
+        <Form onSubmit={postSeats}>
+          <label htmlFor="formName">Nome do comprador:</label>
+          <input
+            id="formName"
+            value={name}
+            type="text"
+            placeholder="Digite seu nome..."
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+
+          <label htmlFor="formCpf">CPF do comprador:</label>
+          <input
+            id="formCpf"
+            value={cpf}
+            type="text"
+            placeholder="Digite seu CPF..."
+            onChange={(e) => setCpf(e.target.value)}
+            required
+          />
+
+          <button type="submit">Reservar assento(s)</button>
+        </Form>
+      </div>
 
       <Footer>
         <img

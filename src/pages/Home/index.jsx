@@ -28,7 +28,7 @@ export default function Home() {
         {movies.map((movie, index) => {
           return (
             <Movie key={index}>
-              <Link to={`/movies/${movie.id}`}>
+              <Link to={`/sessions/${movie.id}`}>
                 <li>
                   <img
                     width={129}

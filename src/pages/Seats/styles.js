@@ -8,6 +8,16 @@ export const Container = styled.div`
   max-width: 37.5rem;
   width: 100%;
 
+  .scroll {
+    max-height: 51rem;
+    overflow-y: auto;
+
+    margin: 0 auto;
+
+    max-width: 37.5rem;
+    width: 100%;
+  }
+
   .title {
     display: flex;
     justify-content: center;
@@ -108,6 +118,47 @@ export const Examples = styled.div`
   p {
     margin-top: 0.5rem;
     font-size: 1.3rem;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.4rem;
+  margin-top: 4.1rem;
+
+  label {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: #293845;
+  }
+
+  input {
+    width: 32.7rem;
+    height: 5.1rem;
+    border-radius: 0.3rem;
+    border: 0.1rem solid #d5d5d5;
+    margin-bottom: 1rem;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      font-style: italic;
+      color: #afafaf;
+      padding-left: 5rem;
+    }
+  }
+  button {
+    cursor: pointer;
+
+    font-size: 1.8rem;
+    margin: 0 auto;
+    margin-top: 3rem;
+    width: 22.5rem;
+    height: 4.2rem;
+    border: none;
+    border-radius: 0.3rem;
+    color: #ffffff;
+    background-color: #e8833a;
   }
 `;
 

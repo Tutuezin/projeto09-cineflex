@@ -3,6 +3,25 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-top: 6.7rem;
   background-color: #fff;
+
+  .loader {
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    margin: 12rem auto;
+    width: 12.4rem;
+    height: 12.4rem;
+    border-radius: 50%;
+
+    border-top: 0.8rem solid rgba(232, 131, 58, 0.8);
+    border-left: 0.8rem solid rgba(232, 131, 58, 0.8);
+    border-right: 0.8rem solid rgba(255, 255, 255, 0);
+
+    animation: spin 0.575s infinite linear;
+  }
 `;
 
 export const Title = styled.h3`

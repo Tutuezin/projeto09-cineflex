@@ -35,8 +35,8 @@ export default function Hours() {
                   <div className="times">
                     {day.showtimes.map((hour, index) => {
                       return (
-                        <Link to={`/section/${hour.id}`}>
-                          <li key={index}>{hour.name}</li>
+                        <Link key={index} to={`/seats/${hour.id}`}>
+                          <li>{hour.name}</li>
                         </Link>
                       );
                     })}
