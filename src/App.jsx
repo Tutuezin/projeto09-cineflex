@@ -12,6 +12,7 @@ function App() {
   const [purchasedSeats, setPurchasedSeats] = useState([]);
   const [purchaserName, setPurchaserName] = useState("");
   const [purchaserCpf, setPurchaserCpf] = useState("");
+
   return (
     <BrowserRouter>
       <GlobalStyle />

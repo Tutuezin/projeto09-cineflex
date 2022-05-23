@@ -123,7 +123,7 @@ export default function Seats({
           <input
             id="formCpf"
             value={cpf}
-            type="text"
+            type="number"
             placeholder="Digite seu CPF..."
             onChange={(e) => {
               setCpf(e.target.value);
